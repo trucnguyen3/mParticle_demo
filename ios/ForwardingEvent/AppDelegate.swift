@@ -2,6 +2,7 @@ import UIKit
 import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
+import mParticle_Apple_SDK
 
 @main
 class AppDelegate: RCTAppDelegate {
@@ -12,6 +13,8 @@ class AppDelegate: RCTAppDelegate {
     // You can add your custom initial props in the dictionary below.
     // They will be passed down to the ViewController used by React Native.
     self.initialProps = [:]
+    
+    let mParticleOptions = MParticleOptions(key: "au1-c97c79bedc7abc4bba0f12133968423d", secret: "RZUk8epBxD2A05DDj9RJHMM9dKBo3uEKCr0Mmew2MH7XcrbZOYH0rahc5NlzZb1L")
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
