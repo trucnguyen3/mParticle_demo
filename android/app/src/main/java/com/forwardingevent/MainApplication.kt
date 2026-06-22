@@ -11,6 +11,12 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import com.mparticle.AttributionError
+import com.mparticle.AttributionListener
+import com.mparticle.AttributionResult
+import com.mparticle.MParticle;
+import com.mparticle.MParticleOptions
+import com.mparticle.identity.BaseIdentityTask
 
 class MainApplication : Application(), ReactApplication {
 
@@ -40,5 +46,21 @@ class MainApplication : Application(), ReactApplication {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
     }
+
+      val options: MParticleOptions? = MParticleOptions.builder(this)
+          .credentials("abc", "abc")
+          .logLevel(MParticle.LogLevel.VERBOSE) //.identify(identifyRequest)
+          .attributionListener(object : AttributionListener {
+              override fun onResult(result: AttributionResult) {
+                  // Không cần viết gì ở đây, mParticle Native tự xử lý lưu trữ ngầm
+                  println("mParticle nhận được dữ liệu cài đặt thành công từ Kit")
+              }
+              override fun onError(error: AttributionError) {
+                  println("mParticle lỗi nhận dữ liệu: ${error.message}")
+              }
+          })
+          .build()
+
+      MParticle.start(options!!)
   }
 }

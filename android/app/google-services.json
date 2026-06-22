@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "444898991521",
+    "project_id": "banking-d6864",
+    "storage_bucket": "banking-d6864.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444898991521:android:dec89dcd1b7e54b153bfe0",
+        "android_client_info": {
+          "package_name": "aka.digital.banking_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLdhaFth_LXEviNnNwWDTjzjjR5AMsHEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444898991521:android:b28a45938c26646953bfe0",
+        "android_client_info": {
+          "package_name": "com.forwardingevent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLdhaFth_LXEviNnNwWDTjzjjR5AMsHEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
