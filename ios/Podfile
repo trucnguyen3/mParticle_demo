@@ -20,7 +20,7 @@ end
 target 'ForwardingEvent' do
   config = use_native_modules!
 
-  pod 'mParticle-Apple-SDK', '~> 8'
+  pod 'mParticle-Apple-SDK', '~> 9'
 
   pod 'mParticle-AppsFlyer'
 
