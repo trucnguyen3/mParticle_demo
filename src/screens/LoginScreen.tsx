@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-// Import mParticle
 import MParticle from 'react-native-mparticle';
 
 export default function LoginScreen({ navigation }: any) {
@@ -9,47 +8,39 @@ export default function LoginScreen({ navigation }: any) {
       const [previousUserObj, setPreviousUserObj] = useState<any>(null);
       const [isLoading, setIsLoading] = useState<boolean>(true);
 
-      // 1. Dùng useEffect để lấy thông tin User ngay khi vừa vào màn hình
       useEffect(() => {
-        console.log('--- MÀN HÌNH LOGIN KÍCH HOẠT ---');
-
         MParticle.Identity.getCurrentUser((currentUser) => {
           if (currentUser) {
             const mpid = currentUser.mpid || currentUser.userId;
-            console.log('useEffect - Đã lấy được MPID hiện tại:', mpid);
-
-            setCurrentMPID(mpid);      // Lưu MPID vào state để dùng ở bất cứ đâu trong file
-            setPreviousUserObj(mpid);  // Lưu giữ object user cũ phục vụ cho việc Alias nếu cần
+            setCurrentMPID(mpid);
+            setPreviousUserObj(mpid);
           } else {
-            console.log('useEffect - Chưa có thông tin user.');
+            console.log('abc');
           }
           setIsLoading(false);
         });
       }, []);
 
 const handleLoginSuccess = () => {
-    // Giả lập thông tin của một User có sẵn trong hệ thống của bạn
     const identityRequest = {
       email: 'truc.nguyen@akadigital.net',
       customerId: 'CDP_03'
     };
 
-    // 1. Gọi Identity để mParticle nhận diện User cũ đăng nhập lại
     MParticle.Identity.login(identityRequest, (error, userId) => {
-      if (!error) console.log('mParticle Login thành công cho user:', userId);
+      if (!error) console.log('mParticle after login:', userId);
 
       const aliasRequest = {
-                sourceMpid: previousUserObj,
-                destinationMpid: userId,
-                // startTime và endTime có thể bỏ qua vì code Native có check: if (startTime == null && endTime == null)
-              };
+        sourceMpid: previousUserObj,
+        destinationMpid: userId,
+      };
 
               // Gọi hàm aliasUsers của module mParticle
               MParticle.Identity.aliasUsers(aliasRequest, (success: boolean, errorMessage: string) => {
                 if (success) {
-                  console.log('✅ Alias thành công rực rỡ!');
+                  console.log('Alias success');
                 } else {
-                  console.error('❌ Alias thất bại:', errorMessage);
+                  console.error('Alias fail:', errorMessage);
                 }
               });
     });
