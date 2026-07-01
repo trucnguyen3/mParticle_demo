@@ -48,7 +48,7 @@ class MainApplication : Application(), ReactApplication {
     }
 
       val options: MParticleOptions? = MParticleOptions.builder(this)
-          .credentials("abc", "abc")
+          .credentials("au1-74743daec6269740809f908401387efa", "gPKFo1zmmJHSrVNprnuaLNU77OgGaX4jGaK-gCQM6zhUSgNYkXSj2pOniaoYYudm")
           .logLevel(MParticle.LogLevel.VERBOSE) //.identify(identifyRequest)
           .attributionListener(object : AttributionListener {
               override fun onResult(result: AttributionResult) {
@@ -60,6 +60,16 @@ class MainApplication : Application(), ReactApplication {
               }
           })
           .build()
+
+      val identityTask = BaseIdentityTask()
+      identityTask.addFailureListener { identityHttpResponse ->
+          println("mParticle Identity thất bại: ${identityHttpResponse.toString()}")
+      }
+      identityTask.addSuccessListener { identityApiResult ->
+          // 2. Khi thành công, lấy MPID trực tiếp từ user hiện tại
+          val mpid = identityApiResult.user.id
+          println("mParticle Identity THÀNH CÔNG! MPID hiện tại là: $mpid")
+      }
 
       MParticle.start(options!!)
   }
